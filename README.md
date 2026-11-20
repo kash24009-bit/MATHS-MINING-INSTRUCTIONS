@@ -20,6 +20,7 @@ Every CBSE Class 12 Mathematics board paper and marking scheme she supplies, min
 | `RULE-CARD.md` | The readers' rules, with section B-MAT for reading Maths |
 | `.claude/agents/mat-reader.md` | The reader subagent |
 | `pyqkit.py`, `mat_code_env.py`, `mat_gate.py`, `mat_marks.py`, `mat_s6.py` | The kit and tools, tested |
+| `outputs/tools/` | Claude Code's own helpers, as Physics ran them: page bands, crop sheets, the paper, sibling and scheme worksheets, the usage measure, the notes filer |
 | `PORT-PROGRESS.md` | What the port did, step by step |
 
 ## How it starts
