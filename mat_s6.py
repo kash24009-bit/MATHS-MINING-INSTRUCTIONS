@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """mat_s6.py - pattern sorting (S6 classification) helper for PYQ Pattern Mining - Mathematics (041).
 Edition 2026-11-16. Written and tested in the project chat on a copy of vault B10 (25,179 rows).
+Edition 2026-11-20 (the port): `follow` added, because here S6 runs at every year's close (CLAUDE.md §12).
 
 It never writes Layer 1. It prepares what a reader needs, turns the reader's decisions into part files the
 gate merges (`<unit>__CLASSIFY.csv`, `<unit>__ERRATA.csv`), applies the reader's REGISTRY rows (Layer 1.5,
@@ -8,7 +9,10 @@ re-runnable, through the kit's own read_table/write_table, as MAT-07 R§12 step 
 before the gate commit. Every count it prints is computed from the vault.
 
   status                                  rows to classify per chapter, done so far, repeat groups
-  groups                                  repeat groups across all years -> work/S6-GROUPS.csv (run once, first)
+  groups                                  repeat groups across all years in the vault -> work/S6-GROUPS.csv
+                                          (run first, at every year's close)
+  follow  --unit S6-FOLLOW-2025           next, at every year's close: each repeat of a row an earlier close
+                                          classified takes its leader's code by script (+ its shuffles)
   sheet   --chapter 04 [--max 380] [--remaining]   the reader's sheet(s): work/S6-CH04__SHEET.md (-1, -2 parts above
                                           380 rows); --remaining: only rows not yet classified (unit S6-CH04-r<HHMM>)
   lines   <instance_id> [...]             the printed scoring lines of rows (for skeletons and traps)
@@ -26,7 +30,7 @@ Paths: vault /home/claude/vault, kit /home/claude/pyqkit.py (override with MAT_V
 import argparse, csv, datetime as dt, importlib.util, json, os, re, shutil, sys
 from collections import Counter, defaultdict
 
-EDITION = "2026-11-16b"
+EDITION = "2026-11-20"
 V = os.environ.get("MAT_VAULT", "/home/claude/vault")
 KIT = os.environ.get("MAT_KIT", "/home/claude/pyqkit.py")
 ENV = os.environ.get("MAT_ENV", "/home/claude/mat_env.json")
@@ -549,6 +553,51 @@ def cmd_expand(a):
 
 
 # ------------------------------------------------------------------------------------------------ alias
+def cmd_follow(a):
+    """Per-year S6 (the port, 2026-11-20; CLAUDE.md §12 and MAT-10's opening note). Every repeat whose group leader
+    an earlier close already classified takes the leader's code (an ALIAS followed to its VERIFIED code), and the
+    shuffles of those rows take it too, as `expand` does for the repeats it reaches. Writes work/<unit>__TODO.csv
+    and work/<unit>__CLASSIFY.csv; then `check --unit <unit>` and the gate commit."""
+    unit = a.unit
+    T = load()
+    members, follower = group_map()
+    b = batch()
+    rv = f"P10.3/B{b:02d}-{dt.date.today().isoformat()}"
+    out, done, skipped = [], {}, []
+    for m, lead in sorted(follower.items()):
+        src = T["cls"].get(lead)
+        if m in T["cls"] or not src:
+            continue            # already coded, or its leader is still to be decided: that sheet and expand cover it
+        code, seen = src["code"], set()
+        while code in T["reg"] and T["reg"][code]["status"] == "ALIAS" and T["reg"][code].get("alias_of") \
+                and code not in seen:
+            seen.add(code)
+            code = T["reg"][code]["alias_of"]
+        g = T["reg"].get(code)
+        if not g or g["status"] != "VERIFIED":
+            skipped.append(f"{m} (leader {lead}: code {src['code']} is not VERIFIED)")
+            continue
+        row = {"instance_id": m, "code": code, "family": g["family"], "cog_level": src["cog_level"],
+               "competency": src["competency"], "difficulty": src["difficulty"], "ncert_ref": "",
+               "confidence": src["confidence"], "batch": str(b), "rule_version": rv}
+        out.append(row)
+        done[m] = row
+    n_rep = len(out)
+    for r in T["I"]:
+        if (r["rel"] == "shuffle" and r.get("rel_to") in done and r["instance_id"] not in T["cls"]
+                and r["instance_id"] not in done and r.get("vi_alt") != "y"):
+            row = dict(done[r["rel_to"]], instance_id=r["instance_id"])
+            out.append(row)
+            done[r["instance_id"]] = row
+    write_csv(os.path.join(W, f"{unit}__TODO.csv"), ["instance_id"],
+              [{"instance_id": m} for m in sorted(done) if m in follower])
+    write_csv(os.path.join(W, f"{unit}__CLASSIFY.csv"), K.SCHEMA["j/CLASSIFY.csv"], out)
+    for x in skipped[:20]:
+        print("  ! " + x + ": left for that chapter's sheet")
+    print(f"follow {unit}: {n_rep} repeat(s) of rows an earlier close classified take their leader's code; "
+          f"{len(out) - n_rep} shuffle(s) of them copied; {len(skipped)} skipped -> work/{unit}__CLASSIFY.csv")
+
+
 def cmd_alias(a):
     """Merge: code --from becomes ALIAS of --to; every CLASSIFY row on --from is re-pointed by an ERRATA row."""
     T = load()
@@ -763,6 +812,9 @@ def main():
     s = sp.add_parser("misses")
     s.add_argument("--write-notes", action="store_true")
     s.set_defaults(fn=cmd_misses)
+    s = sp.add_parser("follow")
+    s.add_argument("--unit", required=True)
+    s.set_defaults(fn=cmd_follow)
     sp.add_parser("coverage").set_defaults(fn=cmd_coverage)
     a = ap.parse_args()
     a.fn(a)

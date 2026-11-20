@@ -57,14 +57,14 @@ import tempfile
 from collections import Counter, defaultdict
 
 csv.field_size_limit(10 ** 8)
-GATE_EDITION = "2026-10-21"
+GATE_EDITION = "2026-11-20"   # the port: 2026-10-21 with the Batch 9 fixes Physics ran from outputs/tools, and a year planner that never defers S6 to S8
 ENV_JSON = os.environ.get("MAT_ENV", "/home/claude/mat_env.json")
 MERGE_ORDER = ["BLUEPRINTS", "CONSTANTS", "CASES", "INSTANCES", "FIGURES", "FORMULAE", "STEP-AWARDS", "UNREADABLE",
                "CLASSIFY", "ERRATA"]
 SEALABLE = ["BLUEPRINTS", "CONSTANTS", "CASES", "INSTANCES", "FIGURES", "FORMULAE", "STEP-AWARDS"]
 READ_FROM = {"image", "bundle-image", "photo", "hi-translation"}
 DECISIONS = {"extractor_right", "part_fixed", "unreadable_logged", "part_added", "not_a_part"}
-PID_TOKEN = re.compile(r"(?<![\w-])(?:SQP\d{4}-\d{3}|T[12]-\d{4}-[0-9A-Z]{3,}|\d{4}C?-[0-9A-Z]{3,}|UNK-X[0-9a-f]{6})(?!\w)")
+PID_TOKEN = re.compile(r"(?<![\w-])(?:SQP\d{4}-\d{3}|T[12]-\d{4}C?-[0-9A-Z]{3,}|\d{4}C?-[0-9A-Z]{3,}|UNK-X[0-9a-f]{6})(?!\w)")  # B09 fix: Term 2 compartment ids T2-2022C-<digits> (PROGRESS ticking)
 VERIFY_COLS = {"S3": "instance_id,marks_part,q_marks_printed,numbers,options,figure_values,note",
                "S4": "instance_id,marks_part,q_marks_printed,numbers,options,figure_values,note",
                "S5": "instance_id,step_marks,key,numbers,note"}
@@ -984,7 +984,7 @@ def plan_year(E, year):
     files = [f for f in K.table(v, "l1/FILES.csv") if f["year"] == str(year) and f["kind"] in ("QP", "MS")]
     if not files:
         return None, [f"no QP or MS file of {year} in FILES: run inventory and the S1 identity step first (MAT-08 Y§2)"]
-    bad = [f["file_id"] for f in files if not f["paper_code"] or not f["paper_id"] or f["exam"] not in ("MAIN", "COMPT")]
+    bad = [f["file_id"] for f in files if not f["paper_code"] or not f["paper_id"] or f["exam"] not in ("MAIN", "COMPT", "T1", "T2")]  # gate 2026-10-21 + B09 fix: T1/T2 are exam values (P§ FILES; 2022 term papers)
     if bad:
         return None, [f"identity incomplete (paper_code, paper_id or exam) for {bad}: finish S1 first"]
     text = open(os.path.join(v, "PROGRESS.md"), encoding="utf-8").read()
@@ -1001,7 +1001,7 @@ def plan_year(E, year):
             series["/".join(parts[:-1])].append(q)
     fids = {f["file_id"] for f in files}
     errs = sorted(e["errata_id"] for e in K.table(v, "l1/ERRATA.csv", errata=False) if e["batch"] == str(E["nn"]) and e["row_id"] in fids)
-    n_main = sum(1 for q in qps if q[2] == "MAIN")
+    n_main = sum(1 for q in qps if q[2] != "COMPT")  # B09 fix: Term 1/Term 2 board papers count as main papers
     lines = [f"- [x] Y{year} S1 intake (B{E['nn']:02d}): {len(files)} files confirmed on page images ({len(mss)} schemes, "
              f"{n_main} main papers, {len(qps) - n_main} compartment papers) -> ERRATA "
              + (f"{errs[0]}..{errs[-1]}" if errs else "none needed") + "; series and origins set",
@@ -1036,11 +1036,12 @@ def plan_year(E, year):
     nos = [q[1] for q in qps if q[0] not in have]
     lines.append(f"- [ ] Y{year} YC year check: every row checked by script, then a blind re-reading of the suspects, "
                  f"the figure directions and a sample (MAT-08 Y§11)")
-    tag = " · DEFERRED to the closing sweep (her decision 2026-10-02)"
+    # gate 2026-11-20 (the port): patterns are never deferred (staff ruling 2026-11-20; CLAUDE.md §12). The year
+    # closes here, in this order: S6 (MAT-10, run per year), the papers with no scheme (after S6), derive, year-close.
+    lines.append(f"- [ ] Y{year} S6 classify: groups, follow, one sheet per chapter (predict first, misses after; MAT-10)")
     if nos:
-        lines.append(f"- [ ] Y{year} S5 papers with no scheme ({', '.join(nos)}): TRANSFERRED/INFERRED after S6, labelled" + tag)
-    lines += [f"- [ ] Y{year} S6 classify chapters 01-14 (predict first, misses after)" + tag,
-              f"- [ ] Y{year} S7 derive + year workbook" + tag, f"- [ ] Y{year} S8 validate + year-close + vault" + tag]
+        lines.append(f"- [ ] Y{year} S5 papers with no scheme ({', '.join(nos)}): TRANSFERRED/INFERRED after S6, labelled")
+    lines += [f"- [ ] Y{year} S7 derive + year workbook", f"- [ ] Y{year} S8 validate + year-close + vault"]
     return lines, []
 
 

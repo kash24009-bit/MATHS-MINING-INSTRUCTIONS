@@ -492,6 +492,20 @@ def main():
         ok = rc2 == 0 and os.path.exists(os.path.join(VAULT, "STATE.json"))
         restore_lines.append("Batch 0: a new vault started with pyqkit init" if ok else
                              "Batch 0: pyqkit init FAILED: " + ((o2 or "") + (e2 or "")).strip()[-300:])
+        if ok:                           # a new vault's notes: the readers' rule card and this project's own addendum
+            os.makedirs(os.path.join(VAULT, "notes"), exist_ok=True)
+            card = os.path.join(instr, "RULE-CARD.md")
+            if os.path.exists(card):
+                shutil.copy2(card, os.path.join(VAULT, "notes", "RULE-CARD.md"))
+                restore_lines.append("Batch 0: the rule card copied from the instructions repository to the vault's notes/")
+            else:
+                WARN.append("RULE-CARD.md is not in the instructions repository: copy it into the vault's notes/ "
+                            "before the first reader")
+            add = os.path.join(VAULT, "notes", "MAT-03-ADDENDUM.md")
+            if not os.path.exists(add):
+                with open(add, "w", encoding="utf-8") as f:
+                    f.write("# MAT-03 addendum (this project's own mistakes, from Batch 0; the Physics lessons are in "
+                            "MAT-03-MISTAKES-LEDGER.md)\n")
     if not ok:
         print("\n".join(restore_lines) or e.strip())
         print("STOP: no vault file was found in any repository or branch. Never start a new vault: "
