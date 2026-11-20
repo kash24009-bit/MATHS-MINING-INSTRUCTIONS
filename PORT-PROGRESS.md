@@ -7,5 +7,5 @@ Each step is committed and pushed when it is done, so a usage stop loses nothing
 - [x] 3. MAT-03 mistakes ledger: every lesson carried from Physics, marked as carried history.
 - [x] 4. MAT-05 syllabus: 55 rows, RECALLED from the rationalised syllabus (the official 2026-27 PDF could not be read from here); Batch 0 verifies every row.
 - [x] 5. MAT-06 pattern seed: 89 DRAFT patterns, each with a plain name, an "asks you to" line and a scoring skeleton; a fresh vault seeds them and validates 16/16.
-- [ ] 6. MAT-09 work plan, MAT-11 teaching handoff, README.
+- [x] 6. MAT-04 CBSE intelligence (every fact labelled VERIFIED, REPORTED or RECALLED), MAT-09 work plan (her order, patterns at every year's close), MAT-11 teaching handoff (the pack format her teacher needs), README.
 - [ ] 7. Final checks, then the pull request.
