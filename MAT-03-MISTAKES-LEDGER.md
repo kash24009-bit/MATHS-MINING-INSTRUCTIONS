@@ -1,4 +1,7 @@
-# MAT-03 · MISTAKES LEDGER — Physics (042)
+# MAT-03 · MISTAKES LEDGER — Mathematics (041)
+
+> **Ported on 2026-11-20 from the Physics (042) project.** Every rule in this file applies to Mathematics (041) unchanged. Its citations and examples (paper codes 55/…, `…-042` sample-paper ids, Q-, ER-, SA- and CONVENTIONS items, batch numbers and counts) are from the Physics vault where each rule was learned: they are history, true as written, and this project's own items replace them as they arise. Where a rule names Physics content (circuits, rays, diodes, plates, current or field directions), `RULE-CARD.md` section B-MAT and `MAT-02-PROTOCOL.md` P§6 give this subject's rule instead. Paths under /home/user/ are where the setup puts each clone; if it prints another path, use that.
+
 ### Every mistake made so far in PYQ mining, why it happened, and the rule in this project that prevents it
 
 **How to use this file (Claude):**
@@ -286,15 +289,15 @@
 
 ### R · The 16 November audit of Batches 8 to 10 (project chat)
 - **R-1 · Lint warnings queued instead of settled.** The 2023 55/2/1 case choice was stored as "(b) against the whole case" although the 55/2 scheme gives (b) 2 marks against (iii); the lint flagged "lines add up to 2, printed 4" at S5 and Q-101 had asked at S3, yet both went to the queue. Four 55/5/1 split rows held a part's printed mark on their last row, where the 275 other split parts leave it blank (Q-202), also flagged and queued.
-  → A warning the reader cannot settle on the page is a doubt for the doubt reader, never a queue item; the queue holds only printed conflicts → CLAUDE.md §7 step 2, MAT-09 §3
+  → A warning the reader cannot settle on the page is a doubt for the doubt reader, never a queue item; the queue holds only printed conflicts → CLAUDE.md §7 step 2, PHY-09 §3
 - **R-2 · A printed layout taken for the choice's scope.** The 55/2 paper prints "(a) passage (i) (ii) (iii) … OR (b)"; every other 2023 paper prints the OR inside (iii) or (c). The scope of a choice is read from the marks (paper and scheme), not from where "OR" sits on the page.
-  → At S3, when a choice's layout differs from the year's other papers, compare the marks of both sides before writing; at S5, a side whose lines add up to less than its printed marks is checked against the scheme's own split before the commit → rule card D (case studies), MAT-09 step 1.3
+  → At S3, when a choice's layout differs from the year's other papers, compare the marks of both sides before writing; at S5, a side whose lines add up to less than its printed marks is checked against the scheme's own split before the commit → rule card D (case studies), PHY-09 step 1.3
 - **R-3 · An assertion-reason key stored as "other".** SA-2023-5551-Q16 holds the key "(A) Both …" as step kind other, so the key-line check could not see it.
   → A printed letter key is a key line even when the scheme prints the option's words after it → rule card C (key rows)
 - **R-4 · Queue summaries cut short.** PROGRESS "Open" shows Q-090 as "K", Q-186 as "u_e" and Q-217 as "m"; the full items in QQUEUE are right.
-  → After a commit that adds a queue item, the PROGRESS summary line is read back once → MAT-09 step 1.3
+  → After a commit that adds a queue item, the PROGRESS summary line is read back once → PHY-09 step 1.3
 - **R-5 · A backlog that grows faster than it is settled.** 219 queue items, 205 open, 121 of them opened since 26 October; about two thirds only record a printed scheme slip the line already keeps with "(sic)".
-  → Items that only record a printed slip are written as "recorded" when they are made, not "open"; the open list keeps only what needs a decision or a page → MAT-09 step 5
+  → Items that only record a printed slip are written as "recorded" when they are made, not "open"; the open list keeps only what needs a decision or a page → PHY-09 step 5
 
 ---
 
@@ -352,9 +355,9 @@
 - **W-25 · Formats split one skill into codes that never meet.** An MCQ and a numerical of the same skill carry different codes by rule, so statistics by code alone show neither as frequent.
   → Families are skill groups that hold the written and the MCQ or A-R codes of one skill → MAT-10 §3.4
 - **W-26 · Two sessions writing one vault (2022 and 2023 side by side).** Restore keeps only the newest vault, so one session's work would vanish (the risk of W-14, now from two Claude Code sessions).
-  → One session at a time; the closing plan is one ordered list → MAT-09 §2
+  → One session at a time; the closing plan is one ordered list → PHY-09 §2
 - **W-27 · A plan left on an unmerged branch.** The 10 November work plan, boot pack and close-out were written on a branch and never merged; her order of 12 November replaced it, and later sessions ran on main's instructions without it.
-  → A plan reaches main through a pull request she merges, or it does not exist; the next session's handover names the file it runs on → MAT-09 header
+  → A plan reaches main through a pull request she merges, or it does not exist; the next session's handover names the file it runs on → PHY-09 header
 
 ---
 

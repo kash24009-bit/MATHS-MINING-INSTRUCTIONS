@@ -1,6 +1,8 @@
 # MAT-10 · Pattern sorting (S6 classification) · written 2026-11-16
 
-*How every Mathematics (041) row gets its pattern code, for all six exam years at once. It carries out CI§5 S6, P§10, MAT-07 R§12 and MAT-08 Y§12 step 3 and changes none of the truth rules (CLAUDE.md §4). Where it differs from them it says so (§9 and §3.4); her approval of this file is that decision, recorded in CONVENTIONS "Pattern sorting (her decision 2026-11-16)" by the first session that uses it. Tool: `mat_s6.py`, edition 2026-11-16b, tested in the project chat on copies of vaults B10 and B11, including the gate's own `check` on its part files (CHECK PASS, validate 16/16). Edition b (after Batch 11) adds save-as-you-go: §6 step 4, §7 steps 2-4.*
+> **Ported on 2026-11-20 from the Physics (042) project.** Every rule in this file applies to Mathematics (041) unchanged. Its citations and examples (paper codes 55/…, `…-042` sample-paper ids, Q-, ER-, SA- and CONVENTIONS items, batch numbers and counts) are from the Physics vault where each rule was learned: they are history, true as written, and this project's own items replace them as they arise. Where a rule names Physics content (circuits, rays, diodes, plates, current or field directions), `RULE-CARD.md` section B-MAT and `MAT-02-PROTOCOL.md` P§6 give this subject's rule instead. Paths under /home/user/ are where the setup puts each clone; if it prints another path, use that.
+
+*How every Physics (042) row gets its pattern code, for all six exam years at once. It carries out CI§5 S6, P§10, MAT-07 R§12 and MAT-08 Y§12 step 3 and changes none of the truth rules (CLAUDE.md §4). Where it differs from them it says so (§9 and §3.4); her approval of this file is that decision, recorded in CONVENTIONS "Pattern sorting (her decision 2026-11-16)" by the first session that uses it. Tool: `mat_s6.py`, edition 2026-11-16b, tested in the project chat on copies of vaults B10 and B11, including the gate's own `check` on its part files (CHECK PASS, validate 16/16). Edition b (after Batch 11) adds save-as-you-go: §6 step 4, §7 steps 2-4.*
 
 ## §1 · What it produces and why it matters
 - Every row gets one code from REGISTRY: the **pattern** (archetype) a student must master to score it. Codes, their plain names, their "asks you to" lines, their scoring skeletons and their traps are what the registers, chapter cards, statistics, predictions and mocks are built from. Without this step the vault is a ledger; with it, it is a map of what CBSE asks.
@@ -9,7 +11,7 @@
 ## §2 · Scope, computed 2026-11-16 on vault B10
 - 6,829 rows need a code (the Definition of Done counts every row except visually-impaired alternatives).
 - 3,787 are new (origin) rows. 139 of them repeat another row word for word or nearly (120 groups, 21 across years); a group is decided once, by its leader, so **3,648 rows are decided by a reader**.
-- 3,041 shuffle rows copy their origin's decision by script; no reader looks at them.
+- 3,042 shuffle rows copy their origin's decision by script; no reader looks at them.
 - 236 rows were sorted earlier (Batch 0: 71 sample-paper rows; Batch 2: chapters 01 and 02 of 2026). They come back on the sheets with "now <code>" and are re-tested under §3; a changed decision becomes an ERRATA row written by the tool.
 - Per chapter, reader decisions: 01 191 · 02 256 · 03 323 · 04 361 · 05 63 · 06 184 · 07 254 · 08 197 · 09 492 (two parts) · 10 318 · 11 305 · 12 226 · 13 159 · 14 319. Run `mat_s6.py status` for the live numbers.
 
@@ -32,16 +34,16 @@
 
 ### 3.4 Formats and families
 - MCQ and assertion-reason rows keep their own codes, named by the concept tested plus "(MCQ)" or "(A-R)" (P§10.3 rule 5), because they carry no skeleton.
-- **Families are skill groups** (tighter than before, her decision through this file): one family holds the written code and the MCQ or A-R codes of the same skill. Example from the pilot: work and energy of a dipole in a uniform field, MA-02-031 (MCQ), MA-02-032 (NUM), MA-02-035 (MCQ). A family is named "FAM-cc-nn <skill in plain words>". Moving a code into a better family is a REGISTRY edit (Layer 1.5), never a new code.
+- **Families are skill groups** (tighter than before, her decision through this file): one family holds the written code and the MCQ or A-R codes of the same skill. Example from the pilot: work and energy of a dipole in a uniform field, PH-02-031 (MCQ), PH-02-032 (NUM), PH-02-035 (MCQ). A family is named "FAM-cc-nn <skill in plain words>". Moving a code into a better family is a REGISTRY edit (Layer 1.5), never a new code.
 
 ### 3.5 Calibration examples from the vault
 | Rows | Decision | Why |
 |---|---|---|
 | 2026-5521-Q21B (500 and 600 nm, 2 marks) and T2-2022-5533-Q06-ii (600 and 500 nm, 3 marks) | same code | same chain: positions of bright fringes of each wavelength, least common position; the extra mark of 2022 is the same lines split finer |
 | 2025-5551-Q25-d2, 2024-5551-Q27-b, 2023-5551-Q32B-d2 (full-wave rectifier with circuit diagram) | same code | same skeleton: diagram, working for both halves, output waveform |
-| 2026-6511-Q01 (V = 10 − 50x, find E) and 2026-5512-Q01 (E = 4x î, find V_A − V_B) | two codes, one family | E = −dV/dx against V = −∫E dx: the second needs integration, a new idea; same skill family |
-| MA-02-013 (predict how C, Q, V, U change when a slab or the gap changes; 12 uses) and MA-02-016 (an isolated sphere's capacitance in another medium) | two codes | the second needs C = 4πε0KR |
-| MA-02-010 (derive C with a dielectric) and MA-02-038 (C with two slabs side by side) | two codes | derivation against application |
+| 2026-5511-Q01 (V = 10 − 50x, find E) and 2026-5512-Q01 (E = 4x î, find V_A − V_B) | two codes, one family | E = −dV/dx against V = −∫E dx: the second needs integration, a new idea; same skill family |
+| PH-02-013 (predict how C, Q, V, U change when a slab or the gap changes; 12 uses) and PH-02-016 (an isolated sphere's capacitance in another medium) | two codes | the second needs C = 4πε0KR |
+| PH-02-010 (derive C with a dielectric) and PH-02-038 (C with two slabs side by side) | two codes | derivation against application |
 
 ### 3.6 Granularity check (Q-018)
 No quota. After all chapters, `mat_s6.py review` lists codes used once and look-alike codes (same q_type, names sharing half their words). A code used once stays when no other code passes §3.1; look-alikes that pass are merged (`mat_s6.py alias`, status ALIAS, the newer into the older, every row re-pointed by ERRATA); a code that holds two patterns is split (new codes, the rows re-decided with `expand --any`, the old code SPLIT with a note).
@@ -94,7 +96,7 @@ Order: 02, 01 (the pilot chapters first: their existing codes calibrate the test
 1. **Review unit S6-REVIEW** (one reader): `mat_s6.py review`; merges with `mat_s6.py alias --unit S6-REVIEW --from X --to Y --reason "<why §3.1 passes>"`; splits with new REGISTRY rows and `expand --unit S6-REVIEW --any`; then `check` and the gate commit.
 2. **Prediction and misses, per year** (CI§5 S6): `mat_s6.py misses --write-notes` writes, for each year, the codes predicted from the other years (asked in the main papers of at least two other years), the predicted codes that were absent, and the codes never seen in another year. *This replaces "predict before classifying": with all years sorted together a prediction written first could use only the 2026 pilot codes, so the leave-one-year-out prediction is the honest form (her decision through this file).* Uncalibrated; no probability is shown (CI§12).
 3. **Tick each year's S6 line** when `mat_s6.py coverage` shows 0 to go for it: `python3 /home/claude/mat_gate.py checkpoint --message "S6 classify <year>" --tick "Y<year> S6 classify"`.
-4. Then S7 for every year (MAT-07 R§12) and the transferred scoring lines of the papers without a scheme (MAT-09 §2 step 4).
+4. Then S7 for every year (MAT-07 R§12) and the transferred scoring lines of the papers without a scheme (PHY-09 §2 step 4).
 
 ## §10 · Budget
 The fifteen sheets total about 1.4 MB of text, about 350,000 tokens (chapter 05 about 6,000; chapter 04, the largest single sheet, about 36,000; each half of chapter 09 about 25,000), measured on vault B10. A reader reads its sheet once and writes short rows, so the cost is mostly its judgement, not reading. **Measured in Batch 11:** the chapter 02 reader, stopped after 21 steps, had used 610,265 weighted tokens, 91 % of its output thinking, and had written nothing, so its work was lost; save-as-you-go (§6 step 4, §7) exists because of it. The estimate is three to four sessions for the fifteen units and the review, possibly more; each unit's weighted usage is measured, and the first complete unit sets the real figure for the rest (said once in the report).

@@ -17,7 +17,7 @@ header, so the examiner-instruction pages are skipped. Each total closes an answ
 marks listed since the previous total must add up to it, else the list says so in a line marked **; an answer
 whose only mark stands in the total column (some Section A tables) is listed from there. A page with no text
 layer prints "no text layer". Uses poppler's pdftotext when installed, else pypdfium2 (the setup installs both).
-Edition 2026-10-21 (made in the project chat; tested on the 2024 schemes, see MAT-AUDIT-2024-B06.md).
+Edition 2026-10-21 (made in the project chat; tested on the 2024 schemes, see PHY-AUDIT-2024-B06.md).
 """
 import argparse
 import hashlib

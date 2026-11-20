@@ -48,7 +48,7 @@ Each layer has its own rule (CI§2).
 
 | Scope | Fed by | Used for |
 |---|---|---|
-| **STRUCTURE** | Papers of blueprint class P33 (2024 onward boards, and SQP 2026-27) | Section composition, type mix per section, choice layout, case format, chapter marks per paper |
+| **STRUCTURE** | Papers of blueprint class P38 (RECALLED as the 2024 onward boards and SQP 2026-27; Batch 0 verifies) | Section composition, type mix per section, choice layout, case format, chapter marks per paper |
 | **PRESENCE** | Every board paper (main; compartment kept separate) of years whose syllabus contained the topic | How often, how recently, how regularly an archetype appears |
 | **METHOD** | Everything, any year and pattern, deleted topics, Hindi-only, SQPs, practice books | Scoring skeletons, accepted reasons, traps, formulas, number design, phrasing |
 
@@ -86,7 +86,7 @@ work/             per-paper part files (not saved in the vault file)
 
 ### 3.3 The auto-vault — automatic backup between sessions
 - **Batch 0:**
-  1. `pyqkit vault-page > /mnt/user-data/outputs/phy042-vault.html`
+  1. `pyqkit vault-page > /mnt/user-data/outputs/mat041-vault.html`
   2. Artifact `publish`: title "MAT-041 VAULT", favicon 🗄️, capabilities `{db: {}, assets: {}}`. She approves once.
   3. **Round-trip test:** `db-export` → `write_db` → `read_db` → `db-import` into scratch → checksums compared. PASS → `vault_url` goes into STATE and CONVENTIONS. FAIL → noted; the vault-file route alone continues.
 - **Every checkpoint:**
@@ -179,7 +179,7 @@ Every MS/SQP-MS in `/mnt/project` must match the year being mined. Any mismatch 
 - **Dual-read** (bundles and any page with a text layer): take the structure from the image (fraction bars, exponents, vectors, which symbol is where) and cross-check every digit against the page text (`pages --text N`).
   - Example: the image shows 3 × 10^8 with a small raised 8; the text shows "3 × 108"; together they give `3e8`.
   - A conflict between the two gets a note and a 300-dpi crop from the original if available; otherwise UNREADABLE `LOWRES`.
-- **Known text-layer damage** (VERIFIED in SQP 2026-27): 10⁸ → "108"; hν → "h"; ¹⁶₈O → "168O"; 30° → "300"; B₁/B₂ → "B and B".
+- **Known text-layer damage** (VERIFIED in the Physics SQP 2026-27; check for the same at Batch 0): 10⁸ → "108"; hν → "h"; ¹⁶₈O → "168O"; 30° → "300"; B₁/B₂ → "B and B".
 
 ### 6.2 Render settings
 - **Originals:** 200 dpi grayscale with `--crop`; 300 dpi `--region` crops for anything small.
@@ -194,6 +194,10 @@ Every MS/SQP-MS in `/mnt/project` must match the year being mined. Any mismatch 
 | Powers of ten | `3e8 m/s`, `1.6e-19 C` |
 | Greek letters and constants | `mu0`, `eps0`, `lambda`, `nu`, `phi0`, `theta`, `omega` |
 | Vectors and unit vectors | `vec(B)`, `i^ j^ k^` |
+| Fractions, powers, roots | `(x+1)/(x-1)`, `x^2`, `sqrt(x)`, `cbrt(x)` |
+| Limits, derivatives, integrals | `lim(x->0) sin(x)/x`, `dy/dx`, `d^2y/dx^2`, `int_0^1 x^2 dx` |
+| Matrices and determinants | row by row: `[[1, 2], [3, 4]]`, `det[[1, 2], [3, 4]]` |
+| Inequalities and intervals | `<=`, `>=`, `(0, 1]`, `x != 0` |
 | Angles | `30 deg` |
 | Subscripts | `B_1`, `R_eq` |
 | Minus signs | `-` |
@@ -204,8 +208,8 @@ Every MS/SQP-MS in `/mnt/project` must match the year being mined. Any mismatch 
 
 ### 6.4 Figures are data
 Every printed figure → FIGURES row:
-- **circuit:** netlist, e.g. `R1=2 ohm A-B; E=6 V r=1 ohm C-A; ammeter A-B series`;
-- **ray diagram:** elements, focal lengths, positions, sizes;
+- **graph or region (LPP, area):** every vertex with coordinates, every inequality, the shaded side, the axes;
+- **geometric figure:** every labelled point, length and angle as printed;
 - **graph:** axes and units, curve shapes, marked points, intercepts, slopes;
 - **field/apparatus:** components and labels.
 
@@ -250,7 +254,7 @@ ERRATA       errata_id file row_id field old new reason evidence batch
 - **choice_pair_id:** `OR-<paper_id>-Q<nn>` on both sides.
 - **case_id:** `CS-<paper_id>-Q<nn>`.
 - **vi_alt:** `y` for visually-impaired alternatives. Excluded from mark sums.
-- **chapter:** `01`–`14`; `15` for Communication Systems (deleted chapter); `X11` for Class 11 content.
+- **chapter:** `01`–`13` as in `MAT-05`; `X11` for Class 11 content.
 - **topic_id:** from SYLLABUS only.
 - **q_type:**
 
@@ -301,17 +305,15 @@ Each sub-part is its own INSTANCES row with its own q_type. `attempt_rule` recor
 ---
 
 ## P§8 · BLUEPRINTS
-Read every paper's own instructions page. Expected classes, verified per paper, with corrections logged:
+Read every paper's own instructions page. Expected classes (RECALLED: every row is verified on the paper's own instructions page, with corrections logged):
 
 | Class | Years (expected) | Shape |
 |---|---|---|
-| P33 | 2024 → 2026 boards; SQP 2026-27 | 33 Q: A 16×1 (12 MCQ + 4 AR) · B 5×2 · C 7×3 · D 2×4 case · E 3×5 |
-| P35 | 2023 | 35 Q: A 18×1 · B 7×2 · C 5×3 · D 2×4 · E 3×5 |
+| P38 | 2023 → 2026 boards; SQP 2026-27 (RECALLED) | 38 Q: A 20×1 (18 MCQ + 2 AR) · B 5×2 · C 6×3 · D 4×5 · E 3×4 case |
 | T1 / T2 | 2022 | Term 1 MCQ-only (OMR); Term 2 subjective; half syllabus each |
-| P37 | 2020 | 37 Q: A 20×1 · B 7×2 · C 7×3 · D 3×5 |
-| P27 | 2019 | 27 Q: A 5×1 · B 7×2 · C 12×3 · D 3×5 |
-| P26 | ~2014–2018 | 26 Q including one 4-mark value-based question |
-| P30 | ~2008–2013 | 30 Q: 8×1 · 10×2 · 9×3 · 3×5 |
+| P36 | 2020 (RECALLED) | 36 Q: A 20×1 · B 6×2 · C 6×4 · D 4×6 |
+| P29 | 2019 (RECALLED) | 29 Q, 100 marks: A 4×1 · B 8×2 · C 11×4 · D 6×6 |
+| UNK | 2018 and older | read from each paper's instructions page; a new class gets its own row here |
 
 **`sections` format:** `A:1-16:1;B:17-21:2;C:22-28:3;D:29-30:4;E:31-33:5`.
 
@@ -375,14 +377,14 @@ A year is eligible for an archetype when a main paper of that year exists and th
 ### 10.5 The eighteen registers (derive writes CSV + MD, grouped by chapter)
 | # | Register | Built from |
 |---|---|---|
-| R01 | Derivations | DRV rows + scoring lines |
-| R02 | Numerical skeletons | NUM rows: givens, unknown, formula chain, unit trap, number design (value ranges) |
-| R03 | Reasons | CON rows + accepted points and how many points the marks demand |
-| R04 | What-happens-if | PRD rows |
-| R05 | Definitions, laws, units | DEF rows |
-| R06 | Diagrams | DGM or `wants_figure` rows + labels required |
-| R07 | Graphs | GRF or `wants_graph` rows |
-| R08 | Devices and instruments | DEV rows |
+| R01 | Proofs and show-that | PRF and DRV rows + every scheme line |
+| R02 | Find and compute | NUM rows: givens, unknown, method chain, the condition trap |
+| R03 | Reasons and justifications | CON and EXP rows |
+| R04 | Applications | APP and PRD rows (rates, maxima and minima, LPP, probability in context) |
+| R05 | Definitions and standard results | DEF rows |
+| R06 | Figures | DGM or `wants_figure` rows |
+| R07 | Graphs and regions | GRF or `wants_graph` rows |
+| R08 | Comparisons and other | CMP and DEV rows |
 | R09 | MCQs | MCQ rows + options + distractor notes |
 | R10 | Assertion–Reason | AR rows + the option set per year |
 | R11 | Case studies | CASES + sub-part types |
@@ -486,7 +488,7 @@ The engine predicts the **menu**: which archetypes, in which sections, at which 
 **Default score (uncalibrated):** `0.5·recency + 0.2·due/2 + 0.2·sqp + 0.1·spread`. After backtests, the weights that maximised marks-weighted hit rate replace it, and the label becomes "backtested on <years>".
 
 ### 15.3 `plan-mock` — the slot plan (deterministic for a given seed)
-1. **Skeleton:** the 2027 blueprint (from the SQP 2026-27 BLUEPRINTS row; default P33 with choice at 20, 21, 27, 31–33).
+1. **Skeleton:** the 2027 blueprint (from the SQP 2026-27 BLUEPRINTS row; default P38, with the choice positions of the SQP 2026-27 row).
 2. **Allowed types per section:** learned from STRUCTURE papers; defaults:
    - A = MCQ (Q1–12), AR (Q13–16);
    - B = CON/NUM/DEF/PRD/CMP/DGM/GRF;
@@ -522,7 +524,7 @@ The engine predicts the **menu**: which archetypes, in which sections, at which 
   - (b) a **variant**: same skeleton, new numbers chosen for clean arithmetic (no calculator);
   - (c) a **fresh** item: new context, same scoring skeleton. Case passages are original writing.
 - **Numbers:** every numerical is solved in Python, with units carried and a dimension check. MCQs have exactly one correct option; distractors follow R09 patterns.
-- **The paper:** CBSE look (general instructions, 15-minute reading note, constants list, sections, internal choices, VI alternative for figure-dependent MCQs). Figures are drawn with matplotlib/schemdraw, or described in words for VI.
+- **The paper:** CBSE look (general instructions, 15-minute reading note, constants list, sections, internal choices, VI alternative for figure-dependent MCQs). Figures are drawn with matplotlib, or described in words for VI.
 - **The marking scheme:** CBSE value-point style with ½ splits, from printed STEP-AWARDS templates where they exist (provenance shown).
 - **The WHY file:** per question, code, evidence (years), score components, why it was chosen.
 - **Files:** `MAT-MOCK-<nnn>-<mode>.pdf`, `MAT-MOCK-<nnn>-MS.pdf`, `MAT-MOCK-<nnn>-WHY.md`, made with the pdf skill (reportlab).
@@ -557,13 +559,13 @@ The engine predicts the **menu**: which archetypes, in which sections, at which 
 One page, on `Brief me on chapter N.` Every section applies a named learning principle:
 
 ```
-CHAPTER BRIEF — Ch 03 Current Electricity (Unit II · mark group G1 = 16) · evidence: <years> · stamp B<nn>
+CHAPTER BRIEF — Ch 05 Continuity and Differentiability (unit and mark group from MAT-05) · evidence: <years> · stamp B<nn>
 Worth            ~X marks/paper (STRUCTURE papers) · last 3 years: a, b, c
 Always there     archetypes present in ≥80% of eligible years
 Top 5            code · name · asks_you_to · marks seen · last seen · score
 Scoring lines    the printed steps for the top 5 (formula ½ · substitution ½ · result + unit ½ …)
                  [worked example → faded example: first fully worked, then with steps blanked]
-Derivations      step skeletons in 3–5 chunks each                      [chunking]
+Proofs           step skeletons in 3–5 chunks each                      [chunking]
 Numericals       formula chain · unit trap · typical numbers            [deliberate practice targets]
 Reasons          accepted points, how many points the marks demand     [elaboration]
 Draw these       diagrams and graphs with mandatory labels             [dual coding]
